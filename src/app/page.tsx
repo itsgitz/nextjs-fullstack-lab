@@ -1,3 +1,5 @@
+import SignIn from "@/components/sign-in";
+import { Button } from "@/components/ui/button";
 import { db } from "@/db/connection";
 import { eventsTableSchema } from "@/db/schema";
 import Link from "next/link";
@@ -11,12 +13,11 @@ export default async function Home() {
     <div className="py-3">
       <h1 className="font-bold text-3xl">Live Scoring</h1>
 
+      <SignIn />
+
       <div className="py-3">
-        <Link
-          href="/events/create"
-          className="font-bold bg-white text-black px-3 py-2 rounded-xl"
-        >
-          Create
+        <Link href="/events/create">
+          <Button>Create</Button>
         </Link>
       </div>
 
