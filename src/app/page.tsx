@@ -1,4 +1,6 @@
+import { auth } from "@/auth";
 import SignIn from "@/components/sign-in";
+import SignOut from "@/components/sign-out";
 import { Button } from "@/components/ui/button";
 import { db } from "@/db/connection";
 import { eventsTableSchema } from "@/db/schema";
@@ -8,12 +10,18 @@ export const dynamic = "force-dynamic";
 
 export default async function Home() {
   const events = await db.select().from(eventsTableSchema);
+  const session = await auth();
+  console.log("session", session);
+
+  if (!session) {
+    return <SignIn />;
+  }
 
   return (
     <div className="py-3">
       <h1 className="font-bold text-3xl">Live Scoring</h1>
 
-      <SignIn />
+      <SignOut />
 
       <div className="py-3">
         <Link href="/events/create">
